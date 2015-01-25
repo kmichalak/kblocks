@@ -1,4 +1,4 @@
-package pl.kmi.kblock.core.puzzle;
+package pl.kmi.kblock.test.helpers;
 
 import java.util.Arrays;
 
