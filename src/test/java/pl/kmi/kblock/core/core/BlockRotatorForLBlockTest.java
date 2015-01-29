@@ -1,6 +1,6 @@
-package pl.kmi.kblock.core.puzzle;
+package pl.kmi.kblock.core.core;
 
-import static pl.kmi.kblock.core.puzzle.Block.*;
+import static pl.kmi.kblock.core.core.Block.*;
 import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
 
 import org.testng.annotations.AfterMethod;

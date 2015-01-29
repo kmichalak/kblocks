@@ -1,14 +1,13 @@
-package pl.kmi.kblock.core.puzzle;
+package pl.kmi.kblock.core.core;
 
-import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
-import static pl.kmi.kblock.core.puzzle.Block.O;
-
-import junit.framework.TestCase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class BlockRotatorForOBlockTest extends TestCase {
+import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
+import static pl.kmi.kblock.core.core.Block.T;
+
+public class BlockRotatorForTBlockTest {
 
     private BlockRotator rotator;
 
@@ -23,47 +22,31 @@ public class BlockRotatorForOBlockTest extends TestCase {
     }
 
     @Test
-    public void testRotatesOBlockRight90() throws Exception {
+    public void testRotatesTBlockRight90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
+                {0, 1},
                 {1, 1},
-                {1, 1}
+                {0, 1}
         };
 
         // when
-        int[][] rotatedRight = rotator.rotateRight(O.getMatrix());
+        int[][] rotatedRight = rotator.rotateRight(T.getMatrix());
 
         // then
         assertMatricesEquals(expectedMatrix, rotatedRight);
     }
 
     @Test
-    public void testRotatesOBlockRight180() throws Exception {
+    public void testRotatesTBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 1, 0},
+                {1, 1, 1},
         };
 
         // when
-        int[][] rotatedRight = rotator.rotateRight(O.getMatrix());
-        rotatedRight = rotator.rotateRight(rotatedRight);
-
-        // then
-        assertMatricesEquals(expectedMatrix, rotatedRight);
-    }
-
-    @Test
-    public void testRotatesOBlockRight270() throws Exception {
-        // given
-        final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
-        };
-
-        // when
-        int[][] rotatedRight = rotator.rotateRight(O.getMatrix());
-        rotatedRight = rotator.rotateRight(rotatedRight);
+        int[][] rotatedRight = rotator.rotateRight(T.getMatrix());
         rotatedRight = rotator.rotateRight(rotatedRight);
 
         // then
@@ -71,15 +54,33 @@ public class BlockRotatorForOBlockTest extends TestCase {
     }
 
     @Test
-    public void testRotatesOBlockRight360() throws Exception {
+    public void testRotatesTBlockRight270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
+                {1, 0},
                 {1, 1},
-                {1, 1}
+                {1, 0}
         };
 
         // when
-        int[][] rotatedRight = rotator.rotateRight(O.getMatrix());
+        int[][] rotatedRight = rotator.rotateRight(T.getMatrix());
+        rotatedRight = rotator.rotateRight(rotatedRight);
+        rotatedRight = rotator.rotateRight(rotatedRight);
+
+        // then
+        assertMatricesEquals(expectedMatrix, rotatedRight);
+    }
+
+    @Test
+    public void testRotatesTBlockRight360() throws Exception {
+        // given
+        final int[][] expectedMatrix = new int[][] {
+                {1, 1, 1},
+                {0, 1, 0},
+        };
+
+        // when
+        int[][] rotatedRight = rotator.rotateRight(T.getMatrix());
         rotatedRight = rotator.rotateRight(rotatedRight);
         rotatedRight = rotator.rotateRight(rotatedRight);
         rotatedRight = rotator.rotateRight(rotatedRight);
@@ -88,79 +89,72 @@ public class BlockRotatorForOBlockTest extends TestCase {
         assertMatricesEquals(expectedMatrix, rotatedRight);
     }
 
-
-
     @Test
-    public void testRotatesOBlockLeft90() throws Exception {
+    public void testRotatesTBlockLeft90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
+                {1, 0},
                 {1, 1},
-                {1, 1}
+                {1, 0}
         };
 
         // when
-        int[][] rotatedRight = rotator.rotateLeft(O.getMatrix());
+        int[][] rotateLeft = rotator.rotateLeft(T.getMatrix());
 
         // then
-        assertMatricesEquals(expectedMatrix, rotatedRight);
-
+        assertMatricesEquals(expectedMatrix, rotateLeft);
     }
 
     @Test
-    public void testRotatesOBlockLeft180() throws Exception {
+    public void testRotatesTBlockLeft180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 1, 0},
+                {1, 1, 1},
         };
 
         // when
-        int[][] rotatedLeft = rotator.rotateLeft(O.getMatrix());
-        rotatedLeft = rotator.rotateLeft(rotatedLeft);
+        int[][] rotateLeft = rotator.rotateLeft(T.getMatrix());
+        rotateLeft = rotator.rotateLeft(rotateLeft);
 
         // then
-        assertMatricesEquals(expectedMatrix, rotatedLeft);
-
+        assertMatricesEquals(expectedMatrix, rotateLeft);
     }
 
     @Test
-    public void testRotatesOBlockLeft270() throws Exception {
+    public void testRotatesTBlockLeft270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
+                {0, 1},
                 {1, 1},
-                {1, 1}
+                {0, 1}
         };
 
         // when
-        int[][] rotatedLeft = rotator.rotateLeft(O.getMatrix());
-        rotatedLeft = rotator.rotateLeft(rotatedLeft);
-        rotatedLeft = rotator.rotateLeft(rotatedLeft);
+        int[][] rotateLeft = rotator.rotateLeft(T.getMatrix());
+        rotateLeft = rotator.rotateLeft(rotateLeft);
+        rotateLeft = rotator.rotateLeft(rotateLeft);
 
         // then
-        assertMatricesEquals(expectedMatrix, rotatedLeft);
-
+        assertMatricesEquals(expectedMatrix, rotateLeft);
     }
 
-
     @Test
-    public void testRotatesOBlockLeft360() throws Exception {
+    public void testRotatesTBlockLeft360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {1, 1, 1},
+                {0, 1, 0},
         };
 
         // when
-        int[][] rotatedLeft = rotator.rotateLeft(O.getMatrix());
+        int[][] rotatedLeft = rotator.rotateLeft(T.getMatrix());
         rotatedLeft = rotator.rotateLeft(rotatedLeft);
         rotatedLeft = rotator.rotateLeft(rotatedLeft);
         rotatedLeft = rotator.rotateLeft(rotatedLeft);
 
         // then
         assertMatricesEquals(expectedMatrix, rotatedLeft);
-
     }
-
-
 
 }
