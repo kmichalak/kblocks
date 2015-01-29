@@ -4,7 +4,7 @@ public enum Block {
 
     I {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {1},
                     {1},
@@ -16,7 +16,7 @@ public enum Block {
 
     O {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {1, 1},
                     {1, 1}
@@ -26,7 +26,7 @@ public enum Block {
 
     T {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {1, 1, 1},
                     {0, 1, 0}
@@ -36,7 +36,7 @@ public enum Block {
 
     L {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {1, 0},
                     {1, 0},
@@ -48,7 +48,7 @@ public enum Block {
 
     J {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {0, 1},
                     {0, 1},
@@ -60,7 +60,7 @@ public enum Block {
 
     S {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {0, 1, 1},
                     {1, 1, 0}
@@ -70,7 +70,7 @@ public enum Block {
 
     Z {
         @Override
-        int[][] getMatrix() {
+        public int[][] getMatrix() {
             return new int[][] {
                     {1, 1, 0},
                     {0, 1, 1}
@@ -78,6 +78,6 @@ public enum Block {
         }
     };
 
-    abstract int[][] getMatrix();
+    public abstract int[][] getMatrix();
 
 }
