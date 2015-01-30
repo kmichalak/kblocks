@@ -1,6 +1,10 @@
 package pl.kmi.kblock.view;
 
-import javax.swing.*;
+import javafx.scene.input.KeyCode;
+import pl.kmi.kblock.core.Box;
+import pl.kmi.kblock.core.core.Block;
+
+import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,9 +13,9 @@ import java.awt.image.BufferedImage;
 public class GameView extends JPanel implements Runnable, KeyListener {
 
 
-    public static final int WIDTH = 320;
-    public static final int HEIGHT = 240;
-    public static final int SCALE = 2;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 860;
+    public static final int SCALE = 1;
 
     // game thread
     private Thread gameThread;
@@ -23,6 +27,10 @@ public class GameView extends JPanel implements Runnable, KeyListener {
     // image
     private BufferedImage image;
     private Graphics2D graphics;
+
+    private Box boxModel;
+    private GameBox gameBox;
+
 
     public GameView() {
         super();
@@ -40,7 +48,11 @@ public class GameView extends JPanel implements Runnable, KeyListener {
         while (running) {
             update();
             draw();
-            drawToScreen();
+            try {
+                Thread.sleep(targetTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -49,19 +61,15 @@ public class GameView extends JPanel implements Runnable, KeyListener {
     }
 
     private void draw() {
-//        graphics.
+        gameBox.draw((Graphics2D) getGraphics());
     }
-
-    private void drawToScreen() {
-        final Graphics tempGraphics = getGraphics();
-        tempGraphics.drawImage(image, 0, 0, null);
-        tempGraphics.dispose();
-    }
-
-
 
     private void init() {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        boxModel = new Box();
+        boxModel.addBlockToBox(Block.L);
+        gameBox = new GameBox(boxModel);
+        gameBox.enableGrid();
         running = true;
     }
 
@@ -72,7 +80,24 @@ public class GameView extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT : {
+                break;
+            }
 
+            case KeyEvent.VK_RIGHT : {
+                break;
+            }
+
+            case KeyEvent.VK_UP : {
+                break;
+            }
+
+            case KeyEvent.VK_DOWN : {
+                break;
+            }
+
+        }
     }
 
     @Override
