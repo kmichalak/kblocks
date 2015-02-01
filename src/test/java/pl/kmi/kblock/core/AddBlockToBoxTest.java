@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import pl.kmi.kblock.core.core.Block;
 import pl.kmi.kblock.test.helpers.Assertions;
 
-public class BoxTest {
+public class AddBlockToBoxTest {
 
     private Box box;
 
