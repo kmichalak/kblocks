@@ -88,6 +88,36 @@ public class Box {
     }
 
     public boolean canMoveBlockDown() {
+        return blockDidNotReachEndOfBox() && !blockCollidesWithOtherBlocks();
+    }
+
+    private boolean blockCollidesWithOtherBlocks() {
+        int[][] currentBlockMatrix = currentBlock.getMatrix();
+        int blockWidth = currentBlockMatrix[0].length;
+        int lastBlockElementPosition = currentBlockColumn + blockWidth - 1;
+
+        int blockHeight = currentBlockMatrix.length;
+        int lastBlockLinePosition = currentBlockRow + blockHeight;
+
+        for (int colNumber = currentBlockColumn; colNumber < lastBlockElementPosition; colNumber++) {
+            if (hitOtherBlock(currentBlockMatrix, lastBlockLinePosition, colNumber)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean hitOtherBlock(int[][] currentBlockMatrix, int lastBlockElementPosition, int colNumber) {
+        return matrix[lastBlockElementPosition - 1][colNumber] == 1
+                && matrix[lastBlockElementPosition][colNumber] == 1;
+    }
+
+    private boolean blockDidNotReachEndOfBox() {
         return currentBlockRow + currentBlock.getMatrix().length < getHeight();
+    }
+
+    public void replaceMatrix(int[][] expectedBoxContent) {
+        matrix = expectedBoxContent;
     }
 }
