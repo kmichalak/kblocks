@@ -4,6 +4,8 @@ import pl.kmi.kblock.core.core.Block;
 
 public class Box {
 
+    private static final int BLOCK_PART = 1;
+    private static final int BLOCK_EMPTY_SPACE = 0;
     private int[][] matrix = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -52,7 +54,9 @@ public class Box {
 
         for (int rowIndex=0; rowIndex < blockHeight; rowIndex++) {
             for (int columnIndex=0; columnIndex < blockWidth; columnIndex++) {
-                matrix[y + rowIndex][x + columnIndex] = blockMatrix[rowIndex][columnIndex];
+                if (matrix[y + rowIndex][x + columnIndex] == 0) {
+                    matrix[y + rowIndex][x + columnIndex] = blockMatrix[rowIndex][columnIndex];
+                }
             }
         }
     }
@@ -82,42 +86,57 @@ public class Box {
 
         for (int rowIndex=0; rowIndex < blockHeight; rowIndex++) {
             for (int columnIndex=0; columnIndex < blockWidth; columnIndex++) {
-                matrix[y + rowIndex][x + columnIndex] = 0;
+                matrix[y + rowIndex][x + columnIndex] = BLOCK_EMPTY_SPACE;
             }
         }
     }
 
     public boolean canMoveBlockDown() {
-        return blockDidNotReachEndOfBox() && !blockCollidesWithOtherBlocks();
+        return !blockReachedEndOfBox() && !blockCollidesWithOtherBlocks();
     }
 
     private boolean blockCollidesWithOtherBlocks() {
         int[][] currentBlockMatrix = currentBlock.getMatrix();
         int blockWidth = currentBlockMatrix[0].length;
-        int lastBlockElementPosition = currentBlockColumn + blockWidth - 1;
-
         int blockHeight = currentBlockMatrix.length;
+        return standsOnBlock(blockWidth, blockHeight) || hangsOnOtherBlock(currentBlockMatrix, blockWidth, blockHeight);
+    }
+
+    private boolean hangsOnOtherBlock(int[][] currentBlockMatrix, int blockWidth, int blockHeight) {
+        for (int blockRow = 0; blockRow < blockHeight - 1; blockRow++) {
+
+            for (int blockColumn = 0; blockColumn < blockWidth; blockColumn++) {
+
+                if (currentBlockMatrix[blockRow][blockColumn] == BLOCK_PART
+                        && currentBlockMatrix[blockRow + 1][blockColumn] == BLOCK_EMPTY_SPACE
+                        && matrix[currentBlockRow + blockRow + 1][currentBlockColumn + blockColumn] == BLOCK_PART) {
+
+                        return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
+    private boolean standsOnBlock(int blockWidth, int blockHeight) {
+        int lastBlockElementPosition = currentBlockColumn + blockWidth - 1;
         int lastBlockLinePosition = currentBlockRow + blockHeight;
 
         for (int colNumber = currentBlockColumn; colNumber < lastBlockElementPosition; colNumber++) {
-            if (hitOtherBlock(currentBlockMatrix, lastBlockLinePosition, colNumber)) {
+
+            if (matrix[lastBlockLinePosition - 1][colNumber] == BLOCK_PART
+                    && matrix[lastBlockLinePosition][colNumber] == BLOCK_PART) {
                 return true;
             }
+
         }
 
         return false;
     }
 
-    private boolean hitOtherBlock(int[][] currentBlockMatrix, int lastBlockElementPosition, int colNumber) {
-        return matrix[lastBlockElementPosition - 1][colNumber] == 1
-                && matrix[lastBlockElementPosition][colNumber] == 1;
+    private boolean blockReachedEndOfBox() {
+        return currentBlockRow + currentBlock.getMatrix().length == getHeight();
     }
 
-    private boolean blockDidNotReachEndOfBox() {
-        return currentBlockRow + currentBlock.getMatrix().length < getHeight();
-    }
-
-    public void replaceMatrix(int[][] expectedBoxContent) {
-        matrix = expectedBoxContent;
-    }
 }

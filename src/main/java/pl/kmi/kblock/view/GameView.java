@@ -1,6 +1,5 @@
 package pl.kmi.kblock.view;
 
-import javafx.scene.input.KeyCode;
 import pl.kmi.kblock.core.Box;
 import pl.kmi.kblock.core.core.Block;
 
