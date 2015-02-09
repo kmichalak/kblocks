@@ -9,6 +9,8 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -16,7 +18,7 @@ import java.awt.image.DataBufferInt;
 import static java.awt.Color.BLACK;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable, KeyListener {
 
     public static final int WIDTH = 420;
     public static final int HEIGHT = 840;
@@ -34,8 +36,10 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_BGR);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-    private Box box = new Box();
+    private volatile Box box = new Box();
     private GameBox gameBox = new GameBox(box);
+
+    private volatile boolean rotateBlock = false;
 
     public Game() {
         Dimension expectedSize = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -55,6 +59,7 @@ public class Game extends Canvas implements Runnable {
         gameFrame.setResizable(false);
         gameFrame.setLocationRelativeTo(null);
         gameFrame.setVisible(true);
+        gameFrame.addKeyListener(this);
     }
 
     @Override
@@ -117,6 +122,17 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
+//        putOnStdOut();
+    }
+
+    private void putOnStdOut() {
+        System.out.flush();
+        for (int i = 0; i<20; i++) {
+            for (int j=0; j<10; j++) {
+                System.out.print(box.getMatrix()[i][j]);
+            }
+            System.out.println("");
+        }
     }
 
     private void initializeGameBox() {
@@ -128,6 +144,11 @@ public class Game extends Canvas implements Runnable {
     private void tick() {
         tickCount++;
         blockMoveTimer--;
+        if (rotateBlock) {
+            box.rotateBlockRight();
+            rotateBlock = false;
+            tickCount--;
+        }
         if (blockMoveTimer == 0) {
             blockMoveTimer = blockMoveTimeout;
             if (box.canMoveBlockDown()) {
@@ -145,5 +166,45 @@ public class Game extends Canvas implements Runnable {
 
     public synchronized void stop() {
         running = false;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT : {
+                if (box.canMoveBlockLeft()) {
+                    box.moveBlockLeft();
+                }
+                break;
+            }
+
+            case KeyEvent.VK_RIGHT : {
+                if (box.canMoveBlockRight()) {
+                    box.moveBlockRight();
+                }
+                break;
+            }
+
+            case KeyEvent.VK_UP : {
+                rotateBlock = true;
+                break;
+            }
+
+            case KeyEvent.VK_DOWN : {
+                break;
+            }
+
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

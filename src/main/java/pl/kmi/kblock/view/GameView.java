@@ -81,10 +81,12 @@ public class GameView extends JPanel implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT : {
+                boxModel.moveBlockLeft();
                 break;
             }
 
             case KeyEvent.VK_RIGHT : {
+                boxModel.moveBlockRight();
                 break;
             }
 
