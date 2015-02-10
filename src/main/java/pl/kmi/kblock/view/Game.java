@@ -100,7 +100,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
             long updateRate = System.currentTimeMillis() - lastTimer;
             if (updateRate >= 1000) {
                 lastTimer += 1000;
-                System.out.println(frames + ", " + ticks);
+//                System.out.println(frames + ", " + ticks);
                 frames = 0;
                 ticks = 0;
             }
@@ -145,8 +145,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
         tickCount++;
         blockMoveTimer--;
         if (rotateBlock) {
-            box.rotateBlockRight();
             rotateBlock = false;
+            box.rotateBlockRight();
             tickCount--;
         }
         if (blockMoveTimer == 0) {

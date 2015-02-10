@@ -25,9 +25,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockRight90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 0},
-                {1, 1},
-                {0, 1},
+                {0, 0, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 1, 1},
+                {0, 0, 0, 1},
         };
 
         // when
@@ -41,8 +42,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 1, 1},
-                {1, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 1, 1, 0},
+                {1, 1, 0, 0},
         };
 
         // when
@@ -57,9 +60,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockRight270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 0},
-                {1, 1},
-                {0, 1},
+                {1, 0, 0, 0},
+                {1, 1, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -75,8 +79,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockRight360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 1, 1},
-                {1, 1, 0},
+                {0, 0, 1, 1},
+                {0, 1, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -93,9 +99,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockLeft90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 0},
-                {1, 1},
-                {0, 1},
+                {1, 0, 0, 0},
+                {1, 1, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -109,8 +116,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockLeft180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 1, 1},
-                {1, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 1, 1, 0},
+                {1, 1, 0, 0},
         };
 
         // when
@@ -125,9 +134,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockLeft270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 0},
-                {1, 1},
-                {0, 1},
+                {0, 0, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 1, 1},
+                {0, 0, 0, 1},
         };
 
         // when
@@ -143,8 +153,10 @@ public class BlockRotatorForSBlockTest {
     public void testRotateSBlockLeft360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 1, 1},
-                {1, 1, 0},
+                {0, 0, 1, 1},
+                {0, 1, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when

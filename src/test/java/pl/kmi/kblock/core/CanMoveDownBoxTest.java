@@ -4,6 +4,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kmi.kblock.core.core.Block;
+import pl.kmi.kblock.test.helpers.MatrixNotEqualException;
 
 import static org.testng.Assert.assertFalse;
 import static pl.kmi.kblock.core.core.Block.S;
@@ -48,8 +49,8 @@ public class CanMoveDownBoxTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
         };
 
         // when
@@ -87,8 +88,8 @@ public class CanMoveDownBoxTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         };
 
@@ -105,7 +106,8 @@ public class CanMoveDownBoxTest {
     public void testBlockDoesNotOverrideOtherBlocksWhenMovingDown() throws Exception {
         // given
         int lastRowPosition = box.getMatrix().length - 1;
-        box.getMatrix()[lastRowPosition - 1] = new int[] {0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
+        box.getMatrix()[lastRowPosition - 2] = new int[] {0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
+        box.getMatrix()[lastRowPosition - 1] = new int[] {0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
         box.getMatrix()[lastRowPosition]     = new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
         box.addBlockToBox(S);
 
@@ -127,9 +129,9 @@ public class CanMoveDownBoxTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         };
 
@@ -146,8 +148,8 @@ public class CanMoveDownBoxTest {
     public void testBlockCanMoveUntilCollidesWithOtherBlock() throws Exception {
         // given
         int lastRowPosition = box.getMatrix().length - 1;
-        box.getMatrix()[lastRowPosition - 2] = new int[] {0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
-        box.getMatrix()[lastRowPosition - 1] = new int[] {0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
+        box.getMatrix()[lastRowPosition - 2] = new int[] {0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
+        box.getMatrix()[lastRowPosition - 1] = new int[] {0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
         box.getMatrix()[lastRowPosition]     = new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
         box.addBlockToBox(S);
 
@@ -169,9 +171,9 @@ public class CanMoveDownBoxTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         };
 

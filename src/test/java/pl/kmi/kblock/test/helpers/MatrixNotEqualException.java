@@ -17,9 +17,9 @@ public class MatrixNotEqualException extends Exception {
     @Override
     public String getMessage() {
         return format(
-                "Expected %s but got %s",
-                Arrays.deepToString(expectedMatrix),
-                Arrays.deepToString(actualMatrix)
+                "Expected \n%s \nbut got \n%s",
+                Arrays.deepToString(expectedMatrix).replace("], ", "]\n"),
+                Arrays.deepToString(actualMatrix).replace("], ", "]\n")
         );
     }
 }

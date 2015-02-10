@@ -25,8 +25,10 @@ public class BlockRotatorForJBlockTest {
     public void testRotateLBlockRight90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 0, 0, 0},
-                {1, 1, 1, 1},
+                {0, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 1, 1, 1},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -40,10 +42,10 @@ public class BlockRotatorForJBlockTest {
     public void testRotateLBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 0},
-                {1, 0},
-                {1, 0}
+                {0, 0, 0, 0},
+                {0, 1, 1, 0},
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
         };
 
         // when
@@ -58,8 +60,10 @@ public class BlockRotatorForJBlockTest {
     public void testRotateLBlockRight270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1, 1, 1},
-                {0, 0, 0, 1},
+                {0, 0, 0, 0},
+                {1, 1, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -75,10 +79,10 @@ public class BlockRotatorForJBlockTest {
     public void testRotateLBlockRight360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 1},
-                {0, 1},
-                {0, 1},
-                {1, 1},
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 1, 1, 0},
+                {0, 0, 0, 0},
         };
 
         // when

@@ -8,7 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class BlockRotatorForOBlockTest extends TestCase {
+public class BlockRotatorForOBlockTest {
 
     private BlockRotator rotator;
 
@@ -26,8 +26,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockRight90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 0, 0, 0},
+                {0, 0, 1, 1},
+                {0, 0, 1, 1},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -41,8 +43,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 1, 1, 0},
+                {0, 1, 1, 0},
         };
 
         // when
@@ -57,8 +61,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockRight270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 0, 0, 0},
+                {1, 1, 0, 0},
+                {1, 1, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -74,8 +80,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockRight360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 1, 1, 0},
+                {0, 1, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -94,8 +102,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockLeft90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 0, 0, 0},
+                {1, 1, 0, 0},
+                {1, 1, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -110,8 +120,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockLeft180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 1, 1, 0},
+                {0, 1, 1, 0},
         };
 
         // when
@@ -127,8 +139,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockLeft270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 0, 0, 0},
+                {0, 0, 1, 1},
+                {0, 0, 1, 1},
+                {0, 0, 0, 0},
         };
 
         // when
@@ -146,8 +160,10 @@ public class BlockRotatorForOBlockTest extends TestCase {
     public void testRotatesOBlockLeft360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {1, 1},
-                {1, 1}
+                {0, 1, 1, 0},
+                {0, 1, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
         };
 
         // when

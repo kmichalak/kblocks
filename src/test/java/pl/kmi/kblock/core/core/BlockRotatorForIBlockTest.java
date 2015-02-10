@@ -24,7 +24,12 @@ public class BlockRotatorForIBlockTest {
     @Test
     public void testRotatesIBlockLeft90() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][]{{1, 1, 1, 1}};
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 0, 0},
+                {1, 1, 1, 1},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+        };
 
         // when
         int[][] rotatedLeft = rotator.rotateLeft(I.getMatrix());
@@ -37,10 +42,10 @@ public class BlockRotatorForIBlockTest {
     public void testRotatesIBlockLeft180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][]{
-                {1},
-                {1},
-                {1},
-                {1}
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
         };
 
         // when
@@ -54,7 +59,12 @@ public class BlockRotatorForIBlockTest {
     @Test
     public void testRotatesIBlockLeft270() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][]{{1, 1, 1, 1}};
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1, 1, 1, 1},
+                {0, 0, 0, 0},
+        };
 
         // when
         int[][] rotatedLeft = rotator.rotateLeft(I.getMatrix());
@@ -69,10 +79,10 @@ public class BlockRotatorForIBlockTest {
     public void testRotatesIBlockLeft360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][]{
-                {1},
-                {1},
-                {1},
-                {1}
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
         };
 
         // when
@@ -89,7 +99,12 @@ public class BlockRotatorForIBlockTest {
     @Test
     public void testRotatesIBlockRight90() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] { {1, 1, 1, 1} };
+        final int[][] expectedMatrix = new int[][] {
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1, 1, 1, 1},
+                {0, 0, 0, 0},
+        };
 
         // when
         int[][] rotatedRight = rotator.rotateRight(I.getMatrix());
@@ -102,10 +117,10 @@ public class BlockRotatorForIBlockTest {
     public void testRotatesIBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][]{
-                {1},
-                {1},
-                {1},
-                {1}
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
+                {0, 1, 0, 0},
         };
 
         // when
@@ -119,10 +134,17 @@ public class BlockRotatorForIBlockTest {
     @Test
     public void testRotatesIBlockRight270() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] { {1, 1, 1, 1} };
+        final int[][] expectedMatrix = new int[][] {
+                {0, 0, 0, 0},
+                {1, 1, 1, 1},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+        };
 
         // when
         int[][] rotatedRight = rotator.rotateRight(I.getMatrix());
+        rotatedRight = rotator.rotateRight(rotatedRight);
+        rotatedRight = rotator.rotateRight(rotatedRight);
 
         // then
         assertMatricesEquals(expectedMatrix, rotatedRight);
@@ -132,14 +154,16 @@ public class BlockRotatorForIBlockTest {
     public void testRotatesIBlockRight360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][]{
-                {1},
-                {1},
-                {1},
-                {1}
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
         };
 
         // when
         int[][] rotatedRight = rotator.rotateRight(I.getMatrix());
+        rotatedRight = rotator.rotateRight(rotatedRight);
+        rotatedRight = rotator.rotateRight(rotatedRight);
         rotatedRight = rotator.rotateRight(rotatedRight);
 
         // then
