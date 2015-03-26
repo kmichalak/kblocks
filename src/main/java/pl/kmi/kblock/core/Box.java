@@ -57,25 +57,42 @@ public class Box {
         addBlockAtPosition(currentBlockMatrix, blockStart, 0);
     }
 
-    private synchronized void addBlockAtPosition(int[][] blockMatrix, int x, int y) {
+    private synchronized void addBlockAtPosition(final int[][] blockMatrix, final int x, final int y) {
         int blockHeight = blockMatrix.length;
         int blockWidth = blockMatrix[0].length;
 
-        for (int rowIndex = 0; rowIndex < blockHeight; rowIndex++) {
+        for (int blockRowIndex = 0; blockRowIndex < blockHeight; blockRowIndex++) {
 
-            for (int columnIndex = 0; columnIndex < blockWidth; columnIndex++) {
-                final int i = y + rowIndex;
-                final int i1 = x + columnIndex;
-                if (i < matrix.length) {
-                    if (matrix[i][i1] == BLOCK_EMPTY_SPACE) {
-                        if (blockMatrix[rowIndex][columnIndex] == BLOCK_PART) {
-                            matrix[i][i1] = blockMatrix[rowIndex][columnIndex];
+            for (int blockColumnIndex = 0; blockColumnIndex < blockWidth; blockColumnIndex++) {
+
+                final int boxRowIndex = y + blockRowIndex;
+                final int boxColumnIndex = x + blockColumnIndex;
+
+                final boolean blockNotBehindLeftWall = boxColumnIndex > -1;
+                final boolean blockNotBehindRighttWall = boxColumnIndex < getWidth();
+
+                if (blockNotBehindLeftWall) {
+
+                    if (blockNotBehindRighttWall) {
+
+                        if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
+
+                            if (blockMatrix[blockRowIndex][blockColumnIndex] == BLOCK_PART) {
+
+                                matrix[boxRowIndex][boxColumnIndex] = blockMatrix[blockRowIndex][blockColumnIndex];
+
+                            }
+
                         }
+
                     }
+
                 }
+
             }
 
         }
+
     }
 
     public int[][] getMatrix() {
@@ -172,7 +189,8 @@ public class Box {
 
         for (int colNumber = currentBlockColumn; colNumber < lastBlockElementPosition; colNumber++) {
 
-            if (lastBlockLinePosition < matrix.length - 1
+            if (colNumber > -1 && colNumber < getWidth()
+                    && lastBlockLinePosition < matrix.length - 1
                     && matrix[lastBlockLinePosition][colNumber] == BLOCK_PART
                     && matrix[lastBlockLinePosition + 1][colNumber] == BLOCK_PART) {
                 System.out.println("Stands on block");
@@ -202,11 +220,37 @@ public class Box {
 
     public boolean canMoveBlockRight() {
         int blockWidth = currentBlockMatrix[0].length;
-        return currentBlockColumn + blockWidth < getWidth();
+
+        for (int columnNumber = blockWidth - 1; columnNumber > 0; columnNumber--) {
+            for (int rowNumber = 0; rowNumber < currentBlockMatrix.length; rowNumber++) {
+                int blockMatrixColumn = currentBlockColumn + columnNumber;
+                int[] ints = currentBlockMatrix[rowNumber];
+                if (ints[columnNumber] == BLOCK_PART) {
+                    if (blockMatrixColumn == getWidth() - 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+
+//        return currentBlockColumn + blockWidth < getWidth();
+        return true;
     }
 
     public boolean canMoveBlockLeft() {
-        return currentBlockColumn > 0;
+        for (int columnNumber = 0; columnNumber < currentBlockMatrix[0].length; columnNumber++) {
+            for (int rowNumber = 0; rowNumber < currentBlockMatrix.length; rowNumber++) {
+                int blockMatrixColumn = currentBlockColumn + columnNumber;
+                int[] ints = currentBlockMatrix[rowNumber];
+                if (ints[columnNumber] == BLOCK_PART) {
+                    if (blockMatrixColumn == 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public synchronized void rotateBlockRight() {
