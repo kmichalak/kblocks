@@ -70,16 +70,21 @@ public class Box {
 
                 final boolean blockNotBehindLeftWall = boxColumnIndex > -1;
                 final boolean blockNotBehindRighttWall = boxColumnIndex < getWidth();
+                final boolean blockIsNotBelowFloor = boxRowIndex < getHeight();
 
-                if (blockNotBehindLeftWall) {
+                if (blockIsNotBelowFloor) {
 
-                    if (blockNotBehindRighttWall) {
+                    if (blockNotBehindLeftWall) {
 
-                        if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
+                        if (blockNotBehindRighttWall) {
 
-                            if (blockMatrix[blockRowIndex][blockColumnIndex] == BLOCK_PART) {
+                            if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
 
-                                matrix[boxRowIndex][boxColumnIndex] = blockMatrix[blockRowIndex][blockColumnIndex];
+                                if (blockMatrix[blockRowIndex][blockColumnIndex] == BLOCK_PART) {
+
+                                    matrix[boxRowIndex][boxColumnIndex] = blockMatrix[blockRowIndex][blockColumnIndex];
+
+                                }
 
                             }
 
