@@ -3,10 +3,6 @@ package pl.kmi.kblock.core;
 import pl.kmi.kblock.core.core.Block;
 import pl.kmi.kblock.core.core.BlockRotator;
 
-import java.util.Arrays;
-
-import static java.util.Arrays.copyOf;
-
 public class Box {
 
     private static final int BLOCK_PART = 1;
@@ -238,8 +234,6 @@ public class Box {
             }
         }
 
-
-//        return currentBlockColumn + blockWidth < getWidth();
         return true;
     }
 
