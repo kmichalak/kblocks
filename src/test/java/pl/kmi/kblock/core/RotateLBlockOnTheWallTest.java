@@ -7,7 +7,7 @@ import pl.kmi.kblock.core.core.Block;
 
 import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
 
-public class RotateBoxOnTheWallTest {
+public class RotateLBlockOnTheWallTest {
 
     private Box gameBox;
 
