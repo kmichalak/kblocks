@@ -256,6 +256,43 @@ public class Box {
         removeBlockFromPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         int[][] tempMatrix = rotator.rotateRight(currentBlockMatrix);
         currentBlockMatrix = tempMatrix;
+        correctBlockPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         addBlockAtPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
+    }
+
+    private void correctBlockPosition(int[][] currentBlockMatrix, int currentBlockColumn, int currentBlockRow) {
+        if (currentBlockColumn < 0) {
+            this.currentBlockColumn = -findFirstNotEmptyColumn(currentBlockMatrix);
+        }
+
+        if (currentBlockColumn + currentBlockMatrix[0].length >= getWidth()) {
+            this.currentBlockColumn = findLastNotEmptyColumn(currentBlockMatrix);
+        }
+
+    }
+
+    private int findLastNotEmptyColumn(int[][] blockMatrix) {
+        for (int columnCounter = blockMatrix[0].length - 1; columnCounter > 0; columnCounter--) {
+            for (int rowCounter = blockMatrix.length - 1; rowCounter > 0; rowCounter--) {
+                if (blockMatrix[rowCounter][columnCounter] == BLOCK_PART) {
+                    int result = getWidth() - blockMatrix[0].length;
+                    return result;
+                }
+            }
+        }
+
+        return getWidth() - blockMatrix[0].length;
+    }
+
+    private int findFirstNotEmptyColumn(int[][] blockMatrix) {
+        for (int columnCounter = 0; columnCounter < blockMatrix[0].length; columnCounter++) {
+            for (int rowCounter = 0; rowCounter < blockMatrix.length; rowCounter++) {
+                if (blockMatrix[rowCounter][columnCounter] == BLOCK_PART) {
+                    return columnCounter;
+                }
+            }
+        }
+
+        return 0;
     }
 }

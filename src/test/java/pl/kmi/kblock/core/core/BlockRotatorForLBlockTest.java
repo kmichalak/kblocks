@@ -1,4 +1,4 @@
-package pl.kmi.kblock.core.core;
+    package pl.kmi.kblock.core.core;
 
 import static pl.kmi.kblock.core.core.Block.*;
 import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
