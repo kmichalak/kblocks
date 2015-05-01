@@ -1,6 +1,7 @@
 package pl.kmi.kblock.view;
 
 import pl.kmi.kblock.core.Box;
+import pl.kmi.kblock.core.core.Block;
 
 import java.awt.*;
 
@@ -19,6 +20,7 @@ public class GameBox extends GameObject {
     private boolean drawGrid;
 
     private int scale = 40;
+    private Block nextBrick;
 
     public GameBox(Box boxModel) {
         this.boxModel = boxModel;
@@ -31,11 +33,32 @@ public class GameBox extends GameObject {
 
     @Override
     public void draw(Graphics2D graphics2D) {
-//        graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-//        graphics2D.fillRect(windowPadding, windowPadding, boxWidth, boxHeight);
         drawBoxWithContent(graphics2D);
+        drawNextItem(graphics2D);
         if (drawGrid) {
             drawGrid(graphics2D);
+        }
+    }
+
+    private void drawNextItem(Graphics2D graphics2D) {
+        Color originalColor = graphics2D.getColor();
+        drawNextBrick(graphics2D);
+        graphics2D.setColor(originalColor);
+    }
+
+    private void drawNextBrick(Graphics2D graphics2D) {
+        if (nextBrick != null) {
+            int[][] nextBrickMatrix = nextBrick.getMatrix();
+            for (int rowNumber = 0; rowNumber < nextBrickMatrix.length; rowNumber++) {
+                for (int colNumber = 0; colNumber < nextBrickMatrix[0].length; colNumber++) {
+                    if (nextBrickMatrix[rowNumber][colNumber] == 1) {
+                        graphics2D.setColor(Color.RED);
+                    } else {
+                        graphics2D.setColor(Color.BLACK);
+                    }
+                    graphics2D.fillRect(colNumber * scale + 500, rowNumber * scale + 100, scale, scale);
+                }
+            }
         }
     }
 
@@ -83,5 +106,13 @@ public class GameBox extends GameObject {
 
     public void disableGrid() {
         drawGrid = false;
+    }
+
+    public boolean isGridEnabled() {
+        return drawGrid;
+    }
+
+    public void setNextBrick(Block nextBrick) {
+        this.nextBrick = nextBrick;
     }
 }

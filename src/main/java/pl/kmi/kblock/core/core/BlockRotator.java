@@ -3,14 +3,17 @@ package pl.kmi.kblock.core.core;
 public class BlockRotator {
 
     public int[][] rotateLeft(int[][] blockMatrix) {
-        int w = blockMatrix.length;
-        int h = blockMatrix[0].length;
+        int blockWidth = blockMatrix.length;
+        int blockHeight = blockMatrix[0].length;
 
-        final int[][] newBlockMatrix = new int[h][w];
+        final int[][] newBlockMatrix = new int[blockHeight][blockWidth];
 
-        for (int i = 0; i < h; ++i) {
-            for (int j = 0; j < w; ++j) {
-                newBlockMatrix[i][j] = blockMatrix[j][h - i - 1];
+        for (int blockRowIndex = 0; blockRowIndex < blockHeight; ++blockRowIndex) {
+            for (int blockColumnIndex = 0; blockColumnIndex < blockWidth; ++blockColumnIndex) {
+                // TODO: Is there any way to refactor this code to extract
+                // some common method? Only this line makes a difference
+                // between rotateLeft and rotateRight methods.
+                newBlockMatrix[blockRowIndex][blockColumnIndex] = blockMatrix[blockColumnIndex][blockHeight - blockRowIndex - 1];
             }
         }
 
@@ -18,14 +21,14 @@ public class BlockRotator {
     }
 
     public int[][] rotateRight(int[][] blockMatrix) {
-        int w = blockMatrix.length;
-        int h = blockMatrix[0].length;
+        int blockWidth = blockMatrix.length;
+        int blockHeight = blockMatrix[0].length;
 
-        final int[][] newBlockMatrix = new int[h][w];
+        final int[][] newBlockMatrix = new int[blockHeight][blockWidth];
 
-        for (int i = 0; i < h; ++i) {
-            for (int j = 0; j < w; ++j) {
-                newBlockMatrix[i][j] = blockMatrix[w - j - 1][i];
+        for (int blockRowIndex = 0; blockRowIndex < blockHeight; ++blockRowIndex) {
+            for (int blockColumnIndex = 0; blockColumnIndex < blockWidth; ++blockColumnIndex) {
+                newBlockMatrix[blockRowIndex][blockColumnIndex] = blockMatrix[blockWidth - blockColumnIndex - 1][blockRowIndex];
             }
         }
 
