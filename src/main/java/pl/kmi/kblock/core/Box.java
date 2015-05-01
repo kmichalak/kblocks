@@ -3,6 +3,8 @@ package pl.kmi.kblock.core;
 import pl.kmi.kblock.core.core.Block;
 import pl.kmi.kblock.core.core.BlockRotator;
 
+import java.util.Arrays;
+
 public class Box {
 
     private static final int BLOCK_PART = 1;
@@ -44,14 +46,28 @@ public class Box {
     public void addBlockToBox(Block block) {
         currentBlockMatrix = block.getMatrix();
 
+        int brickYPositionFix = getFirstBlockRowPosition(currentBlockMatrix);
+
         int blockWidth = currentBlockMatrix[0].length;
         int blockStart = (matrix[0].length - blockWidth) / 2;
 
         currentBlockColumn = blockStart;
-        currentBlockRow = 0;
+        currentBlockRow = 0 - brickYPositionFix;
 
-        addBlockAtPosition(currentBlockMatrix, blockStart, 0);
+        addBlockAtPosition(currentBlockMatrix, blockStart, currentBlockRow);
     }
+
+    private int getFirstBlockRowPosition(int[][] currentBlockMatrix) {
+        for (int rowNumber = 0; rowNumber < currentBlockMatrix.length; rowNumber++) {
+            for (int columnNumber = 0; columnNumber < currentBlockMatrix[0].length; columnNumber++) {
+                if (currentBlockMatrix[rowNumber][columnNumber] == BLOCK_PART) {
+                    return rowNumber;
+                }
+            }
+        }
+        return 0;
+    }
+
 
     private synchronized void addBlockAtPosition(final int[][] blockMatrix, final int x, final int y) {
         int blockHeight = blockMatrix.length;
@@ -74,14 +90,16 @@ public class Box {
 
                         if (blockNotBehindRighttWall) {
 
-                            if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
+                            if (boxRowIndex >= 0) {
+                                if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
 
-                                if (blockMatrix[blockRowIndex][blockColumnIndex] == BLOCK_PART) {
+                                    if (blockMatrix[blockRowIndex][blockColumnIndex] == BLOCK_PART) {
 
-                                    matrix[boxRowIndex][boxColumnIndex] = blockMatrix[blockRowIndex][blockColumnIndex];
+                                        matrix[boxRowIndex][boxColumnIndex] = blockMatrix[blockRowIndex][blockColumnIndex];
+
+                                    }
 
                                 }
-
                             }
 
                         }
@@ -275,7 +293,8 @@ public class Box {
         for (int columnCounter = blockMatrix[0].length - 1; columnCounter > 0; columnCounter--) {
             for (int rowCounter = blockMatrix.length - 1; rowCounter > 0; rowCounter--) {
                 if (blockMatrix[rowCounter][columnCounter] == BLOCK_PART) {
-                    int result = getWidth() - blockMatrix[0].length;
+                    int blockWidth = blockMatrix[0].length;
+                    int result = getWidth() - blockWidth + (blockWidth - columnCounter) - 1;
                     return result;
                 }
             }
