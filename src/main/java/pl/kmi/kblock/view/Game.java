@@ -20,8 +20,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 
-    public static final int WIDTH = 420;
-    public static final int HEIGHT = 840;
+    public static final int WIDTH = 820;
+    public static final int HEIGHT = 830;
     public static final int SCALE = 1;
     public static final String NAME = "Tetris";
 
@@ -38,6 +38,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private volatile Box box = new Box();
     private GameBox gameBox = new GameBox(box);
+    private Block nextBlock = Block.T;
+    private int nextBlockIndex = 0;
+    private Block[] blocks = Block.values();
 
     private volatile boolean rotateBlock = false;
 
@@ -118,6 +121,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         g.setColor(BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
+        gameBox.setNextBrick(nextBlock);
         gameBox.draw((Graphics2D) g);
 
         g.dispose();
@@ -154,7 +158,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
             if (box.canMoveBlockDown()) {
                 box.moveBlockDown();
             } else {
-                box.addBlockToBox(Block.T);
+                box.addBlockToBox(nextBlock);
             }
         }
     }
@@ -200,6 +204,21 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 break;
             }
 
+            case KeyEvent.VK_SPACE : {
+                nextBlockIndex++;
+                if (nextBlockIndex >= blocks.length) {
+                    nextBlockIndex = 0;
+                }
+                nextBlock = blocks[nextBlockIndex];
+            }
+
+            case KeyEvent.VK_G : {
+                if (gameBox.isGridEnabled()) {
+                    gameBox.disableGrid();
+                } else {
+                    gameBox.enableGrid();
+                }
+            }
         }
     }
 

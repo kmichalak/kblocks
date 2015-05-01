@@ -8,7 +8,7 @@ import pl.kmi.kblock.core.core.Block;
 import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
 import static pl.kmi.kblock.test.helpers.MatrixFactory.createBoxMatrix;
 
-public class RotateLBlockOnTheWallTest {
+public class RotateOBlockOnTheWallTest {
 
     private Box gameBox;
 
@@ -23,42 +23,42 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock90OnLeftWall() throws Exception {
+    public void testRotateOBlock90OnLeftWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
-                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                }
-        );
-
-        gameBox.addBlockToBox(Block.L);
-        while (gameBox.canMoveBlockLeft()) {
-            gameBox.moveBlockLeft();
-        }
-
-        // when
-        gameBox.rotateBlockRight();
-
-        // then
-        assertMatricesEquals(expectedMatrix, gameBox.getMatrix());
-    }
-
-    @Test
-    public void testRotateLBlock180OnLeftWall() throws Exception {
-        // given
-        int[][] expectedMatrix = createBoxMatrix(
-                new int[][] {
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
+        while (gameBox.canMoveBlockLeft()) {
+            gameBox.moveBlockLeft();
+        }
+
+        // when
+        gameBox.rotateBlockRight();
+
+        // then
+        assertMatricesEquals(expectedMatrix, gameBox.getMatrix());
+    }
+
+    @Test
+    public void testRotateOBlock180OnLeftWall() throws Exception {
+        // given
+        int[][] expectedMatrix = createBoxMatrix(
+                new int[][] {
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                }
+        );
+
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockLeft()) {
             gameBox.moveBlockLeft();
         }
@@ -72,18 +72,18 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock270OnLeftWall() throws Exception {
+    public void testRotateOBlock270OnLeftWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                        {1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockLeft()) {
             gameBox.moveBlockLeft();
         }
@@ -98,18 +98,18 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock360OnLeftWall() throws Exception {
+    public void testRotateOBlock360OnLeftWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockLeft()) {
             gameBox.moveBlockLeft();
         }
@@ -125,18 +125,18 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock90OnRightWall() throws Exception {
+    public void testRotateOBlock90OnRightWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
-                        {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockRight()) {
             gameBox.moveBlockRight();
         }
@@ -149,18 +149,18 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock180OnRightWall() throws Exception {
+    public void testRotateOBlock180OnRightWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockRight()) {
             gameBox.moveBlockRight();
         }
@@ -174,18 +174,18 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock270OnRightWall() throws Exception {
+    public void testRotateOBlock270OnRightWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 1, 1, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockRight()) {
             gameBox.moveBlockRight();
         }
@@ -200,18 +200,18 @@ public class RotateLBlockOnTheWallTest {
     }
 
     @Test
-    public void testRotateLBlock360OnRightWall() throws Exception {
+    public void testRotateOBlock360OnRightWall() throws Exception {
         // given
         int[][] expectedMatrix = createBoxMatrix(
                 new int[][] {
-                        {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
-        gameBox.addBlockToBox(Block.L);
+        gameBox.addBlockToBox(Block.O);
         while (gameBox.canMoveBlockRight()) {
             gameBox.moveBlockRight();
         }
