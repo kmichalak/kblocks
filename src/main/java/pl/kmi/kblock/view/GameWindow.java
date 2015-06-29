@@ -5,13 +5,19 @@ import java.awt.*;
 
 public class GameWindow extends JFrame {
 
-    public GameWindow() throws HeadlessException {
-        GameView gameView = new GameView();
-        setContentPane(gameView);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        pack();
+    public GameWindow(String name, Component parent) throws HeadlessException {
+        super(name);
+        setupWindow(parent);
         setVisible(true);
-        gameView.run();
     }
+
+    private void setupWindow(Component parent) {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        add(parent, BorderLayout.CENTER);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        pack();
+    }
+
 }

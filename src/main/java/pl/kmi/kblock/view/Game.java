@@ -1,22 +1,19 @@
 package pl.kmi.kblock.view;
 
-import pl.kmi.kblock.core.model.Box;
 import pl.kmi.kblock.core.model.Block;
+import pl.kmi.kblock.core.model.Box;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import static java.awt.Color.BLACK;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 
@@ -27,8 +24,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private boolean running = false;
 
-    private JFrame gameFrame;   // GamaVie wwill be used here
-    private int tickCount = 0;
+    private JFrame gameFrame;
 
     private int blockMoveTimeout = 60;
     private int blockMoveTimer = blockMoveTimeout;
@@ -54,15 +50,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     private void setupGameFrame() {
-        gameFrame = new JFrame(NAME);
-        gameFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        gameFrame.setLayout(new BorderLayout());
-        gameFrame.add(this, BorderLayout.CENTER);
-        gameFrame.pack();
-        gameFrame.setResizable(false);
-        gameFrame.setLocationRelativeTo(null);
-        gameFrame.setVisible(true);
+        gameFrame = new GameWindow(NAME, this);
         gameFrame.addKeyListener(this);
+        gameFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Game.this.stop();
+            }
+        });
     }
 
     @Override
@@ -111,13 +106,13 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     private void render() {
-        BufferStrategy bs = getBufferStrategy();
-        if (bs == null) {
+        BufferStrategy bufferStrategy = getBufferStrategy();
+        if (bufferStrategy == null) {
             createBufferStrategy(3);
             return;
         }
 
-        Graphics g = bs.getDrawGraphics();
+        Graphics g = bufferStrategy.getDrawGraphics();
         g.setColor(BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -125,18 +120,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         gameBox.draw((Graphics2D) g);
 
         g.dispose();
-        bs.show();
-//        putOnStdOut();
-    }
-
-    private void putOnStdOut() {
-        System.out.flush();
-        for (int i = 0; i<20; i++) {
-            for (int j=0; j<10; j++) {
-                System.out.print(box.getMatrix()[i][j]);
-            }
-            System.out.println("");
-        }
+        bufferStrategy.show();
     }
 
     private void initializeGameBox() {
@@ -146,12 +130,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     private void tick() {
-        tickCount++;
         blockMoveTimer--;
         if (rotateBlock) {
             rotateBlock = false;
             box.rotateBlockRight();
-            tickCount--;
         }
         if (blockMoveTimer == 0) {
             blockMoveTimer = blockMoveTimeout;

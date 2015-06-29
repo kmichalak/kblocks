@@ -10,9 +10,6 @@ public class BlockRotator {
 
         for (int blockRowIndex = 0; blockRowIndex < blockHeight; ++blockRowIndex) {
             for (int blockColumnIndex = 0; blockColumnIndex < blockWidth; ++blockColumnIndex) {
-                // TODO: Is there any way to refactor this code to extract
-                // some common method? Only this line makes a difference
-                // between rotateLeft and rotateRight methods.
                 newBlockMatrix[blockRowIndex][blockColumnIndex] = blockMatrix[blockColumnIndex][blockHeight - blockRowIndex - 1];
             }
         }
