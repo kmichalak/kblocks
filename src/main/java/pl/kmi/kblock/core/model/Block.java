@@ -1,4 +1,4 @@
-package pl.kmi.kblock.core.core;
+package pl.kmi.kblock.core.model;
 
 public enum Block {
 

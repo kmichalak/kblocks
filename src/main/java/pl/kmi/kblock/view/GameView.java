@@ -1,7 +1,7 @@
 package pl.kmi.kblock.view;
 
-import pl.kmi.kblock.core.Box;
-import pl.kmi.kblock.core.core.Block;
+import pl.kmi.kblock.core.model.Box;
+import pl.kmi.kblock.core.model.Block;
 
 import javax.swing.JPanel;
 import java.awt.*;

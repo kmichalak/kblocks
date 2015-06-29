@@ -1,7 +1,7 @@
 package pl.kmi.kblock.view;
 
-import pl.kmi.kblock.core.Box;
-import pl.kmi.kblock.core.core.Block;
+import pl.kmi.kblock.core.model.Box;
+import pl.kmi.kblock.core.model.Block;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -210,6 +210,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
                     nextBlockIndex = 0;
                 }
                 nextBlock = blocks[nextBlockIndex];
+                break;
             }
 
             case KeyEvent.VK_G : {
@@ -218,6 +219,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 } else {
                     gameBox.enableGrid();
                 }
+                break;
             }
         }
     }

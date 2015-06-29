@@ -74,6 +74,14 @@
             <version>3.3.2</version>
         </dependency>
 
+        <!-- Gamepad support -->
+        <dependency>
+            <groupId>net.java.jinput</groupId>
+            <artifactId>jinput-platform</artifactId>
+            <classifier>natives-windows</classifier>
+            <version>2.0.6</version>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.testng</groupId>

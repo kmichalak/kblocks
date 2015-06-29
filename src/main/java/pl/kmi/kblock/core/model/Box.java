@@ -1,9 +1,4 @@
-package pl.kmi.kblock.core;
-
-import pl.kmi.kblock.core.core.Block;
-import pl.kmi.kblock.core.core.BlockRotator;
-
-import java.util.Arrays;
+package pl.kmi.kblock.core.model;
 
 public class Box {
 
@@ -46,7 +41,7 @@ public class Box {
     public void addBlockToBox(Block block) {
         currentBlockMatrix = block.getMatrix();
 
-        int brickYPositionFix = getFirstBlockRowPosition(currentBlockMatrix);
+        int brickYPositionFix = getPositionOfFirstNotEmptyRow(currentBlockMatrix);
 
         int blockWidth = currentBlockMatrix[0].length;
         int blockStart = (matrix[0].length - blockWidth) / 2;
@@ -57,7 +52,7 @@ public class Box {
         addBlockAtPosition(currentBlockMatrix, blockStart, currentBlockRow);
     }
 
-    private int getFirstBlockRowPosition(int[][] currentBlockMatrix) {
+    private int getPositionOfFirstNotEmptyRow(int[][] currentBlockMatrix) {
         for (int rowNumber = 0; rowNumber < currentBlockMatrix.length; rowNumber++) {
             for (int columnNumber = 0; columnNumber < currentBlockMatrix[0].length; columnNumber++) {
                 if (currentBlockMatrix[rowNumber][columnNumber] == BLOCK_PART) {
@@ -70,8 +65,8 @@ public class Box {
 
 
     private synchronized void addBlockAtPosition(final int[][] blockMatrix, final int x, final int y) {
-        int blockHeight = blockMatrix.length;
-        int blockWidth = blockMatrix[0].length;
+        final int blockHeight = blockMatrix.length;
+        final int blockWidth = blockMatrix[0].length;
 
         for (int blockRowIndex = 0; blockRowIndex < blockHeight; blockRowIndex++) {
 
@@ -81,14 +76,14 @@ public class Box {
                 final int boxColumnIndex = x + blockColumnIndex;
 
                 final boolean blockNotBehindLeftWall = boxColumnIndex > -1;
-                final boolean blockNotBehindRighttWall = boxColumnIndex < getWidth();
+                final boolean blockDoesNotStartBehindRightWall = boxColumnIndex < getWidth();
                 final boolean blockIsNotBelowFloor = boxRowIndex < getHeight();
 
                 if (blockIsNotBelowFloor) {
 
                     if (blockNotBehindLeftWall) {
 
-                        if (blockNotBehindRighttWall) {
+                        if (blockDoesNotStartBehindRightWall) {
 
                             if (boxRowIndex >= 0) {
                                 if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
@@ -101,6 +96,7 @@ public class Box {
 
                                 }
                             }
+
 
                         }
 
@@ -272,8 +268,7 @@ public class Box {
 
     public synchronized void rotateBlockRight() {
         removeBlockFromPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
-        int[][] tempMatrix = rotator.rotateRight(currentBlockMatrix);
-        currentBlockMatrix = tempMatrix;
+        currentBlockMatrix = rotator.rotateRight(currentBlockMatrix);
         correctBlockPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         addBlockAtPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
     }
@@ -287,16 +282,21 @@ public class Box {
             this.currentBlockColumn = findLastNotEmptyColumn(currentBlockMatrix);
         }
 
+
     }
 
     private int findLastNotEmptyColumn(int[][] blockMatrix) {
-        for (int columnCounter = blockMatrix[0].length - 1; columnCounter > 0; columnCounter--) {
-            for (int rowCounter = blockMatrix.length - 1; rowCounter > 0; rowCounter--) {
-                if (blockMatrix[rowCounter][columnCounter] == BLOCK_PART) {
-                    int blockWidth = blockMatrix[0].length;
-                    int result = getWidth() - blockWidth + (blockWidth - columnCounter) - 1;
+        final int blockWidth = blockMatrix[0].length;
+        final int blockHeight = blockMatrix.length;
+
+        for (int blockColumnNumber = blockWidth - 1; blockColumnNumber >= 0; blockColumnNumber--) {
+            for (int blockRowNumber = blockHeight - 1; blockRowNumber >= 0; blockRowNumber--) {
+
+                if (blockMatrix[blockRowNumber][blockColumnNumber] == BLOCK_PART) {
+                    int result = getWidth() - blockWidth + (blockWidth - blockColumnNumber) - 1;
                     return result;
                 }
+
             }
         }
 

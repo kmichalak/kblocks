@@ -1,11 +1,12 @@
 package pl.kmi.kblock.core;
 
-import static pl.kmi.kblock.core.core.Block.*;
+import static pl.kmi.kblock.core.model.Block.*;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.kmi.kblock.core.core.Block;
+import pl.kmi.kblock.core.model.Block;
+import pl.kmi.kblock.core.model.Box;
 import pl.kmi.kblock.test.helpers.Assertions;
 
 public class AddBlockToBoxTest {
