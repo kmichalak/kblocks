@@ -3,15 +3,12 @@ package pl.kmi.kblock.view;
 import pl.kmi.kblock.core.model.Block;
 import pl.kmi.kblock.core.model.Box;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 import static java.awt.Color.BLACK;
 
@@ -24,13 +21,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private boolean running = false;
 
-    private JFrame gameFrame;
-
     private int blockMoveTimeout = 60;
     private int blockMoveTimer = blockMoveTimeout;
-
-    private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_BGR);
-    private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
     private volatile Box box = new Box();
     private GameBox gameBox = new GameBox(box);
@@ -50,7 +42,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     private void setupGameFrame() {
-        gameFrame = new GameWindow(NAME, this);
+        GameWindow gameFrame = new GameWindow(NAME, this);
         gameFrame.addKeyListener(this);
         gameFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -66,9 +58,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
         // ~60 FPS
         double nsPerTick = 16666666.66666667D; // 1000000000D / 60D = 16666666,66666667D
 
-        int ticks = 0;
-        int frames = 0;
-
         long lastTimer = System.currentTimeMillis();
         double delta = 0;
 
@@ -83,7 +72,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
             boolean shouldRender = false;
 
             while (delta >= 1) {
-                ticks++;
                 tick();
                 delta -= 1;
 
@@ -91,16 +79,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
             }
 
             if (shouldRender) {
-                frames++;
                 render();
             }
 
             long updateRate = System.currentTimeMillis() - lastTimer;
             if (updateRate >= 1000) {
                 lastTimer += 1000;
-//                System.out.println(frames + ", " + ticks);
-                frames = 0;
-                ticks = 0;
             }
         }
     }
