@@ -1,4 +1,4 @@
-package pl.kmi.kblock.core;
+package pl.kmi.kblock.core.rotation.wall;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -7,11 +7,13 @@ import pl.kmi.kblock.core.model.Block;
 import pl.kmi.kblock.core.model.Box;
 
 import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
-import static pl.kmi.kblock.test.helpers.MatrixFactory.createBoxMatrix;
+import static pl.kmi.kblock.test.helpers.Assertions.assertThat;
+import static pl.kmi.kblock.test.helpers.MatrixFactory.boxMatrixThatBeginsWith;
 
-public class RotateTBlockOnTheWallTest {
+public class RotateBlockOnTheWallTest extends RotateOnTheWallTest {
 
     private Box boxModel;
+    private Block block = Block.T;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -25,30 +27,26 @@ public class RotateTBlockOnTheWallTest {
 
     @Test
     public void testRotateTBlock90OnRightWall() throws Exception {
-        // given
-        int[][] expectedMatrix = createBoxMatrix(
-                new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                }
-        );
-
-        boxModel.addBlockToBox(Block.T);
-        stickToTheRightWall();
-
-        // when
-        boxModel.rotateBlockRight();
-
-        // then
-        assertMatricesEquals(expectedMatrix, boxModel.getMatrix());
+        assertThat(block)
+                .putInBox(boxModel)
+                .movedToTheRightWall()
+                .afterRotation90ToTheRight()
+                .equalsTo(boxMatrixThatBeginsWith(
+                        new int[][]{
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        }
+                ));
     }
+
+
 
     @Test
     public void testRotateTBlock180OnRightWall() throws Exception {
         // given
-        int[][] expectedMatrix = createBoxMatrix(
+        int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -57,12 +55,11 @@ public class RotateTBlockOnTheWallTest {
                 }
         );
 
-        boxModel.addBlockToBox(Block.T);
-        stickToTheRightWall();
+        boxModel.addBlockToBox(block);
+        stickToTheRightWall(boxModel);
 
         // when
-        boxModel.rotateBlockRight();
-        boxModel.rotateBlockRight();
+        rotateBlockRight180(boxModel);
 
         // then
         assertMatricesEquals(expectedMatrix, boxModel.getMatrix());
@@ -71,7 +68,7 @@ public class RotateTBlockOnTheWallTest {
     @Test
     public void testRotateTBlock270OnRightWall() throws Exception {
         // given
-        int[][] expectedMatrix = createBoxMatrix(
+        int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
@@ -80,13 +77,11 @@ public class RotateTBlockOnTheWallTest {
                 }
         );
 
-        boxModel.addBlockToBox(Block.T);
-        stickToTheRightWall();
+        boxModel.addBlockToBox(block);
+        stickToTheRightWall(boxModel);
 
         // when
-        boxModel.rotateBlockRight();
-        boxModel.rotateBlockRight();
-        boxModel.rotateBlockRight();
+        rotateBlockRight270(boxModel);
 
         // then
         assertMatricesEquals(expectedMatrix, boxModel.getMatrix());
@@ -95,7 +90,7 @@ public class RotateTBlockOnTheWallTest {
     @Test
     public void testRotateTBlock360OnRightWall() throws Exception {
         // given
-        int[][] expectedMatrix = createBoxMatrix(
+        int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
@@ -104,22 +99,15 @@ public class RotateTBlockOnTheWallTest {
                 }
         );
 
-        boxModel.addBlockToBox(Block.T);
-        stickToTheRightWall();
+        boxModel.addBlockToBox(block);
+        stickToTheRightWall(boxModel);
 
         // when
-        boxModel.rotateBlockRight();
-        boxModel.rotateBlockRight();
-        boxModel.rotateBlockRight();
-        boxModel.rotateBlockRight();
+        rotateBlockRight360(boxModel);
 
         // then
         assertMatricesEquals(expectedMatrix, boxModel.getMatrix());
     }
 
-    private void stickToTheRightWall() {
-        while (boxModel.canMoveBlockRight()) {
-            boxModel.moveBlockRight();
-        }
-    }
+
 }

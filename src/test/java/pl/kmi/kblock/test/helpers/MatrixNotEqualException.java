@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import static java.lang.String.format;
 
-public class MatrixNotEqualException extends Exception {
+public class MatrixNotEqualException extends RuntimeException {
 
     private int[][] expectedMatrix;
     private int[][] actualMatrix;

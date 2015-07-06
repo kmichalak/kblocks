@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MatrixFactory {
 
-    public static int[][] createBoxMatrix(int[][] matrixPartial) {
+    public static int[][] boxMatrixThatBeginsWith(int[][] matrixPartial) {
 
         int[][] expectedMatrix = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

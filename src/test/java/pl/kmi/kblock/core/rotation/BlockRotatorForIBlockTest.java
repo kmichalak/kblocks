@@ -1,4 +1,4 @@
-package pl.kmi.kblock.core.core;
+package pl.kmi.kblock.core.rotation;
 
 import static pl.kmi.kblock.test.helpers.Assertions.*;
 import static pl.kmi.kblock.core.model.Block.*;

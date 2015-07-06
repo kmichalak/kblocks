@@ -1,4 +1,4 @@
-package pl.kmi.kblock.core.core;
+package pl.kmi.kblock.core.rotation;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

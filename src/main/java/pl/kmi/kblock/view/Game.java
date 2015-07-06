@@ -17,7 +17,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static final int WIDTH = 820;
     public static final int HEIGHT = 830;
     public static final int SCALE = 1;
-    public static final String NAME = "Tetris";
+    public static final String NAME = "KBlock";
 
     private boolean running = false;
 
@@ -147,30 +147,30 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
-            case KeyEvent.VK_LEFT : {
+            case KeyEvent.VK_LEFT: {
                 if (box.canMoveBlockLeft()) {
                     box.moveBlockLeft();
                 }
                 break;
             }
 
-            case KeyEvent.VK_RIGHT : {
+            case KeyEvent.VK_RIGHT: {
                 if (box.canMoveBlockRight()) {
                     box.moveBlockRight();
                 }
                 break;
             }
 
-            case KeyEvent.VK_UP : {
+            case KeyEvent.VK_UP: {
                 rotateBlock = true;
                 break;
             }
 
-            case KeyEvent.VK_DOWN : {
+            case KeyEvent.VK_DOWN: {
                 break;
             }
 
-            case KeyEvent.VK_SPACE : {
+            case KeyEvent.VK_SPACE: {
                 nextBlockIndex++;
                 if (nextBlockIndex >= blocks.length) {
                     nextBlockIndex = 0;
@@ -179,7 +179,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 break;
             }
 
-            case KeyEvent.VK_G : {
+            case KeyEvent.VK_G: {
                 if (gameBox.isGridEnabled()) {
                     gameBox.disableGrid();
                 } else {
