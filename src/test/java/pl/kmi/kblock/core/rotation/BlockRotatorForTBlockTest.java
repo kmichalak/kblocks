@@ -5,8 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kmi.kblock.core.model.BlockRotator;
 
-import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
 import static pl.kmi.kblock.core.model.Block.T;
+import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
 
 public class BlockRotatorForTBlockTest {
 
@@ -25,11 +25,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockRight90() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 1},
-                {0, 0, 1, 1},
-                {0, 0, 0, 1},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 1},
+                {0, 1, 1},
+                {0, 0, 1},
         };
 
         // when
@@ -42,11 +41,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockRight180() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 1, 0},
-                {0, 1, 1, 1},
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 0},
+                {0, 1, 0},
+                {1, 1, 1},
         };
 
         // when
@@ -60,11 +58,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockRight270() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {1, 0, 0, 0},
-                {1, 1, 0, 0},
-                {1, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {1, 0, 0},
+                {1, 1, 0},
+                {1, 0, 0},
         };
 
         // when
@@ -79,11 +76,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockRight360() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {1, 1, 1, 0},
-                {0, 1, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {1, 1, 1},
+                {0, 1, 0},
+                {0, 0, 0},
         };
 
         // when
@@ -99,11 +95,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockLeft90() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {1, 0, 0, 0},
-                {1, 1, 0, 0},
-                {1, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {1, 0, 0},
+                {1, 1, 0},
+                {1, 0, 0},
         };
 
         // when
@@ -116,11 +111,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockLeft180() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 1, 0},
-                {0, 1, 1, 1},
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 0},
+                {0, 1, 0},
+                {1, 1, 1},
         };
 
         // when
@@ -134,11 +128,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockLeft270() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 1},
-                {0, 0, 1, 1},
-                {0, 0, 0, 1},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 1},
+                {0, 1, 1},
+                {0, 0, 1},
         };
 
         // when
@@ -153,11 +146,10 @@ public class BlockRotatorForTBlockTest {
     @Test
     public void testRotatesTBlockLeft360() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {1, 1, 1, 0},
-                {0, 1, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {1, 1, 1},
+                {0, 1, 0},
+                {0, 0, 0},
         };
 
         // when

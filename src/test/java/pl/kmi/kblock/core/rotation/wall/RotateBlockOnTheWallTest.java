@@ -49,9 +49,9 @@ public class RotateBlockOnTheWallTest extends RotateOnTheWallTest {
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
@@ -70,7 +70,6 @@ public class RotateBlockOnTheWallTest extends RotateOnTheWallTest {
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
@@ -94,7 +93,6 @@ public class RotateBlockOnTheWallTest extends RotateOnTheWallTest {
                 new int[][]{
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );

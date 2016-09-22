@@ -52,9 +52,9 @@ public class RotateTBlockOnTheWallTest extends RotateOnTheWallTest {
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
@@ -73,10 +73,10 @@ public class RotateTBlockOnTheWallTest extends RotateOnTheWallTest {
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
@@ -136,9 +136,9 @@ public class RotateTBlockOnTheWallTest extends RotateOnTheWallTest {
                 .afterRotation90ToTheRight()
                 .equalsTo(boxMatrixThatBeginsWith(
                         new int[][]{
-                                {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         }
                 ));
@@ -153,9 +153,9 @@ public class RotateTBlockOnTheWallTest extends RotateOnTheWallTest {
                 .equalsTo(boxMatrixThatBeginsWith(
                         new int[][]{
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
                         }
                 ));
     }
@@ -168,14 +168,12 @@ public class RotateTBlockOnTheWallTest extends RotateOnTheWallTest {
                 .afterRotation270ToTheRight()
                 .equalsTo(boxMatrixThatBeginsWith(
                         new int[][]{
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                                 {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
                                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         }
                 ));
     }
-
-
 
 }

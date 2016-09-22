@@ -26,10 +26,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockRight90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -43,10 +43,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -61,10 +61,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockRight270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -80,10 +80,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockRight360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -102,10 +102,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockLeft90() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -120,10 +120,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockLeft180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -139,10 +139,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockLeft270() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when
@@ -160,10 +160,10 @@ public class BlockRotatorForOBlockTest {
     public void testRotatesOBlockLeft360() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+                //                    {0, 0, 0, 0},
+                    {/*0, */1, 1/*, 0*/},
+                    {/*0, */1, 1/*, 0*/},
+//                    {0, 0, 0, 0},
         };
 
         // when

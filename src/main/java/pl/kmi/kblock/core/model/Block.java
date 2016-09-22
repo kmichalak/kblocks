@@ -5,7 +5,7 @@ public enum Block {
     I {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
+            return new int[][]{
                     {0, 0, 1, 0},
                     {0, 0, 1, 0},
                     {0, 0, 1, 0},
@@ -17,12 +17,9 @@ public enum Block {
     O {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
-                    {0, 0, 0, 0},
-                    {0, 1, 1, 0},
-                    {0, 1, 1, 0},
-                    {0, 0, 0, 0},
-
+            return new int[][]{
+                    {1, 1},
+                    {1, 1},
             };
         }
     },
@@ -30,11 +27,10 @@ public enum Block {
     T {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
-                    {1, 1, 1, 0},
-                    {0, 1, 0, 0},
-                    {0, 0, 0, 0},
-                    {0, 0, 0, 0},
+            return new int[][]{
+                    {1, 1, 1},
+                    {0, 1, 0},
+                    {0, 0, 0}
             };
         }
     },
@@ -42,7 +38,7 @@ public enum Block {
     L {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
+            return new int[][]{
                     {0, 1, 0, 0},
                     {0, 1, 0, 0},
                     {0, 1, 1, 0},
@@ -54,7 +50,7 @@ public enum Block {
     J {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
+            return new int[][]{
                     {0, 0, 1, 0},
                     {0, 0, 1, 0},
                     {0, 1, 1, 0},
@@ -66,7 +62,7 @@ public enum Block {
     S {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
+            return new int[][]{
                     {0, 0, 1, 1},
                     {0, 1, 1, 0},
                     {0, 0, 0, 0},
@@ -78,7 +74,7 @@ public enum Block {
     Z {
         @Override
         public int[][] getMatrix() {
-            return new int[][] {
+            return new int[][]{
                     {1, 1, 0, 0},
                     {0, 1, 1, 0},
                     {0, 0, 0, 0},
