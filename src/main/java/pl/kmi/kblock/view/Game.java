@@ -2,6 +2,7 @@ package pl.kmi.kblock.view;
 
 import pl.kmi.kblock.core.model.Block;
 import pl.kmi.kblock.core.model.Box;
+import pl.kmi.kblock.io.Keyboard;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.util.*;
+import java.util.List;
 
 import static java.awt.Color.BLACK;
 
@@ -29,6 +32,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     private Block nextBlock = Block.T;
     private int nextBlockIndex = 0;
     private Block[] blocks = Block.values();
+    private Keyboard keyboard;
 
     private volatile boolean rotateBlock = false;
 
@@ -42,8 +46,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     private void setupGameFrame() {
+        keyboard = new Keyboard();
         GameWindow gameFrame = new GameWindow(NAME, this);
-        gameFrame.addKeyListener(this);
+        gameFrame.addKeyListener(keyboard);
         gameFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -115,11 +120,17 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private void tick() {
         blockMoveTimer--;
-        if (rotateBlock) {
-            rotateBlock = false;
-            box.rotateBlockRight();
+
+        if (blockMoveTimer % 3 == 0) {
+            handleInput();
         }
+
+//        if (rotateBlock) {
+//            rotateBlock = false;
+//            box.rotateBlockRight();
+//        }
         if (blockMoveTimer == 0) {
+
             blockMoveTimer = blockMoveTimeout;
             if (box.canMoveBlockDown()) {
                 box.moveBlockDown();
@@ -127,6 +138,51 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 box.addBlockToBox(nextBlock);
             }
         }
+    }
+
+    private void handleInput() {
+        List<Map.Entry<Integer, Boolean>> state = keyboard.getState();
+
+        state.stream().forEach(entry -> {
+            switch (entry.getKey()) {
+                case KeyEvent.VK_UP:
+                    if (entry.getValue()) {
+                        box.rotateBlockRight();
+                    }
+                    break;
+                case KeyEvent.VK_LEFT:
+                    if (entry.getValue() && box.canMoveBlockLeft()) {
+                        box.moveBlockLeft();
+                    }
+                    break;
+
+                case KeyEvent.VK_RIGHT:
+                    if (entry.getValue() && box.canMoveBlockRight()) {
+                        box.moveBlockRight();
+                    }
+                    break;
+                case KeyEvent.VK_SPACE:
+                    if (entry.getValue()) {
+                        nextBlockIndex++;
+                        if (nextBlockIndex >= blocks.length) {
+                            nextBlockIndex = 0;
+                        }
+                        nextBlock = blocks[nextBlockIndex];
+                    }
+                    break;
+                case KeyEvent.VK_G:
+                    if (entry.getValue()) {
+                        if (gameBox.isGridEnabled()) {
+                            gameBox.disableGrid();
+                        } else {
+                            gameBox.enableGrid();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 
     public synchronized void start() {
