@@ -1,14 +1,14 @@
-    package pl.kmi.kblock.core.rotation;
-
-import static pl.kmi.kblock.core.model.Block.*;
-import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
+package pl.kmi.kblock.core.rotation;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kmi.kblock.core.model.BlockRotator;
 
-    public class BlockRotatorForLBlockTest {
+import static pl.kmi.kblock.core.model.Block.L;
+import static pl.kmi.kblock.test.helpers.Assertions.assertMatricesEquals;
+
+public class BlockRotatorForLBlockTest {
 
     private BlockRotator rotator;
 
@@ -25,11 +25,10 @@ import pl.kmi.kblock.core.model.BlockRotator;
     @Test
     public void testRotateLBlockRight90() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 1, 1, 1},
-                {0, 1, 0, 0},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {1, 1, 1},
+                {1, 0, 0},
+                {0, 0, 0},
         };
 
         // when
@@ -43,10 +42,9 @@ import pl.kmi.kblock.core.model.BlockRotator;
     public void testRotateLBlockRight180() throws Exception {
         // given
         final int[][] expectedMatrix = new int[][]{
-                {0, 0, 0, 0},
-                {0, 1, 1, 0},
-                {0, 0, 1, 0},
-                {0, 0, 1, 0},
+                {0, 1, 1},
+                {0, 0, 1},
+                {0, 0, 1},
         };
 
         // when
@@ -60,11 +58,10 @@ import pl.kmi.kblock.core.model.BlockRotator;
     @Test
     public void testRotateLBlockRight270() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 0, 0, 0},
-                {0, 0, 1, 0},
-                {1, 1, 1, 0},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {0, 0, 0},
+                {0, 0, 1},
+                {1, 1, 1},
         };
 
         // when
@@ -79,11 +76,10 @@ import pl.kmi.kblock.core.model.BlockRotator;
     @Test
     public void testRotateLBlockRight360() throws Exception {
         // given
-        final int[][] expectedMatrix = new int[][] {
-                {0, 1, 0, 0},
-                {0, 1, 0, 0},
-                {0, 1, 1, 0},
-                {0, 0, 0, 0},
+        final int[][] expectedMatrix = new int[][]{
+                {1, 0, 0},
+                {1, 0, 0},
+                {1, 1, 0},
         };
 
         // when

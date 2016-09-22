@@ -41,8 +41,6 @@ public class RotateBlockOnTheWallTest extends RotateOnTheWallTest {
                 ));
     }
 
-
-
     @Test
     public void testRotateTBlock180OnRightWall() throws Exception {
         // given

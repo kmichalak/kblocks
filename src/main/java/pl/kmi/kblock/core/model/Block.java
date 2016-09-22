@@ -39,10 +39,9 @@ public enum Block {
         @Override
         public int[][] getMatrix() {
             return new int[][]{
-                    {0, 1, 0, 0},
-                    {0, 1, 0, 0},
-                    {0, 1, 1, 0},
-                    {0, 0, 0, 0},
+                    {1, 0, 0},
+                    {1, 0, 0},
+                    {1, 1, 0},
             };
         }
     },

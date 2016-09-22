@@ -29,7 +29,6 @@ public class RotateLBlockOnTheWallTest extends RotateOnTheWallTest{
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
                         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -53,10 +52,9 @@ public class RotateLBlockOnTheWallTest extends RotateOnTheWallTest{
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
@@ -104,9 +102,9 @@ public class RotateLBlockOnTheWallTest extends RotateOnTheWallTest{
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
@@ -128,9 +126,9 @@ public class RotateLBlockOnTheWallTest extends RotateOnTheWallTest{
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
@@ -152,10 +150,10 @@ public class RotateLBlockOnTheWallTest extends RotateOnTheWallTest{
         // given
         int[][] expectedMatrix = boxMatrixThatBeginsWith(
                 new int[][]{
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 }
         );
 
