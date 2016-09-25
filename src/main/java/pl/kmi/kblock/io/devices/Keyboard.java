@@ -1,4 +1,4 @@
-package pl.kmi.kblock.io;
+package pl.kmi.kblock.io.devices;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

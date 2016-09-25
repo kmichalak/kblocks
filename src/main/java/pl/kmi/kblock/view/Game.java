@@ -2,20 +2,19 @@ package pl.kmi.kblock.view;
 
 import pl.kmi.kblock.core.model.Block;
 import pl.kmi.kblock.core.model.Box;
-import pl.kmi.kblock.io.Keyboard;
+import pl.kmi.kblock.io.devices.Keyboard;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
-import java.util.*;
 import java.util.List;
+import java.util.Map;
 
 import static java.awt.Color.BLACK;
 
-public class Game extends Canvas implements Runnable, KeyListener {
+public class Game extends Canvas implements Runnable {
 
     public static final int WIDTH = 820;
     public static final int HEIGHT = 830;
@@ -24,7 +23,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private boolean running = false;
 
-    private int blockMoveTimeout = 60;
+    private int blockMoveTimeout = 60 / 2;
     private int blockMoveTimer = blockMoveTimeout;
 
     private volatile Box box = new Box();
@@ -33,8 +32,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
     private int nextBlockIndex = 0;
     private Block[] blocks = Block.values();
     private Keyboard keyboard;
-
-    private volatile boolean rotateBlock = false;
 
     public Game() {
         Dimension expectedSize = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -125,10 +122,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
             handleInput();
         }
 
-//        if (rotateBlock) {
-//            rotateBlock = false;
-//            box.rotateBlockRight();
-//        }
         if (blockMoveTimer == 0) {
 
             blockMoveTimer = blockMoveTimeout;
@@ -194,60 +187,4 @@ public class Game extends Canvas implements Runnable, KeyListener {
         running = false;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.VK_LEFT: {
-                if (box.canMoveBlockLeft()) {
-                    box.moveBlockLeft();
-                }
-                break;
-            }
-
-            case KeyEvent.VK_RIGHT: {
-                if (box.canMoveBlockRight()) {
-                    box.moveBlockRight();
-                }
-                break;
-            }
-
-            case KeyEvent.VK_UP: {
-                rotateBlock = true;
-                break;
-            }
-
-            case KeyEvent.VK_DOWN: {
-                break;
-            }
-
-            case KeyEvent.VK_SPACE: {
-                nextBlockIndex++;
-                if (nextBlockIndex >= blocks.length) {
-                    nextBlockIndex = 0;
-                }
-                nextBlock = blocks[nextBlockIndex];
-                break;
-            }
-
-            case KeyEvent.VK_G: {
-                if (gameBox.isGridEnabled()) {
-                    gameBox.disableGrid();
-                } else {
-                    gameBox.enableGrid();
-                }
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }
