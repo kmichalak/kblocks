@@ -3,10 +3,9 @@ package pl.kmi.kblock.core.model;
 public class Box {
 
     private static final int BLOCK_PART = 1;
-    private static final int BLOCK_EMPTY_SPACE = 0;
     private final BlockRotator rotator;
 
-    private final int[][] matrix = new int[][]{
+    private int[][] matrix = new int[][]{
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -43,12 +42,9 @@ public class Box {
 
         final int brickYPositionFix = getPositionOfFirstNotEmptyRow(currentBlockMatrix);
         final int blockWidth = currentBlockMatrix[0].length;
-        final int blockStart = (matrix[0].length - blockWidth) / 2;
 
-        currentBlockColumn = blockStart;
+        currentBlockColumn = (matrix[0].length - blockWidth) / 2;
         currentBlockRow = 0 - brickYPositionFix;
-
-        addBlockAtPosition(currentBlockMatrix, blockStart, currentBlockRow);
     }
 
     private int getPositionOfFirstNotEmptyRow(int[][] currentBlockMatrix) {
@@ -63,52 +59,6 @@ public class Box {
     }
 
 
-    private synchronized void addBlockAtPosition(final int[][] blockMatrix, final int x, final int y) {
-        final int blockHeight = blockMatrix.length;
-        final int blockWidth = blockMatrix[0].length;
-
-        for (int blockRowIndex = 0; blockRowIndex < blockHeight; blockRowIndex++) {
-
-            for (int blockColumnIndex = 0; blockColumnIndex < blockWidth; blockColumnIndex++) {
-
-                final int boxRowIndex = y + blockRowIndex;
-                final int boxColumnIndex = x + blockColumnIndex;
-
-                final boolean blockNotBehindLeftWall = boxColumnIndex > -1;
-                final boolean blockDoesNotStartBehindRightWall = boxColumnIndex < getWidth();
-                final boolean blockIsNotBelowFloor = boxRowIndex < getHeight();
-
-                if (blockIsNotBelowFloor) {
-
-                    if (blockNotBehindLeftWall) {
-
-                        if (blockDoesNotStartBehindRightWall) {
-
-                            if (boxRowIndex >= 0) {
-                                if (matrix[boxRowIndex][boxColumnIndex] == BLOCK_EMPTY_SPACE) {
-
-                                    if (blockMatrix[blockRowIndex][blockColumnIndex] == BLOCK_PART) {
-
-                                        matrix[boxRowIndex][boxColumnIndex] = blockMatrix[blockRowIndex][blockColumnIndex];
-
-                                    }
-
-                                }
-                            }
-
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
     public int[][] getMatrix() {
         return matrix;
     }
@@ -122,74 +72,33 @@ public class Box {
     }
 
     public void moveBlockDown() {
-        removeBlockFromPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         currentBlockRow++;
-        addBlockAtPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
     }
 
     public void moveBlockLeft() {
-        removeBlockFromPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         currentBlockColumn--;
-        addBlockAtPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
     }
 
     public void moveBlockRight() {
-        removeBlockFromPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         currentBlockColumn++;
-        addBlockAtPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
     }
 
-    private synchronized void removeBlockFromPosition(int[][] blockMatrix, int x, int y) {
-        int blockHeight = blockMatrix.length;
-        int blockWidth = blockMatrix[0].length;
-
-        for (int rowIndex = 0; rowIndex < blockHeight; rowIndex++) {
-
-            for (int columnIndex = 0; columnIndex < blockWidth; columnIndex++) {
-                if (blockMatrix[rowIndex][columnIndex] == BLOCK_PART) {
-
-                    if (y + rowIndex < matrix.length) {
-                        if (matrix[y + rowIndex][x + columnIndex] == BLOCK_PART) {
-                            matrix[y + rowIndex][x + columnIndex] = BLOCK_EMPTY_SPACE;
-                        }
-
-                    }
-
-                }
-
-            }
-        }
-    }
-
-    private boolean blockCollidesWithOtherBlocks() {
+    private boolean blockWillLand() {
         int blockWidth = currentBlockMatrix[0].length;
         int blockHeight = currentBlockMatrix.length;
 
-        return standsOnBlock(blockWidth, blockHeight) || hangsOnOtherBlock(currentBlockMatrix, blockWidth, blockHeight);
-    }
-
-    private boolean hangsOnOtherBlock(int[][] currentBlockMatrix, int blockWidth, int blockHeight) {
         for (int blockRow = blockHeight - 1; blockRow >= 0; blockRow--) {
+            int[] row = currentBlockMatrix[blockRow];
 
             for (int blockColumn = 0; blockColumn < blockWidth; blockColumn++) {
-
-                final int nextBlockRow = blockRow + 1;
-
-                final int matrixRowAfterBlock = currentBlockRow + blockRow + 1;
-                if (matrixRowAfterBlock < matrix.length) {
-                    if (currentBlockMatrix[blockRow][blockColumn] == BLOCK_PART) {
-                        if (nextBlockRow < blockHeight) {
-                            if (currentBlockMatrix[nextBlockRow][blockColumn] == BLOCK_EMPTY_SPACE) {
-                                if (matrix[matrixRowAfterBlock][currentBlockColumn + blockColumn] == BLOCK_PART) {
-                                    return true;
-                                }
-                            }
-                        }
-
-                    }
-
+                int matrixRow = currentBlockRow + 1 + blockRow;
+                int matrixCol = currentBlockColumn + blockColumn;
+                if (matrixRow >= 0 && matrixRow < matrix.length
+                        && matrixCol >= 0 && matrixCol < matrix[0].length
+                        && matrix[matrixRow][matrixCol] == 1
+                        && row[blockColumn] == 1) {
+                    return true;
                 }
-
             }
 
         }
@@ -197,23 +106,20 @@ public class Box {
         return false;
     }
 
-    private boolean standsOnBlock(int blockWidth, int blockHeight) {
-        int lastBlockElementPosition = currentBlockColumn + blockWidth - 1;
-        int lastBlockLinePosition = currentBlockRow + blockHeight - 1;
+    public void putBlockInBox() {
+        int blockWidth = currentBlockMatrix[0].length;
+        int blockHeight = currentBlockMatrix.length;
 
-        for (int colNumber = currentBlockColumn; colNumber < lastBlockElementPosition; colNumber++) {
+        for (int blockRow = blockHeight - 1; blockRow >= 0; blockRow--) {
+            int[] row = currentBlockMatrix[blockRow];
 
-            if (colNumber > -1 && colNumber < getWidth()
-                    && lastBlockLinePosition < matrix.length - 1
-                    && matrix[lastBlockLinePosition][colNumber] == BLOCK_PART
-                    && matrix[lastBlockLinePosition + 1][colNumber] == BLOCK_PART) {
-                System.out.println("Stands on block");
-                return true;
+            for (int blockColumn = 0; blockColumn < blockWidth; blockColumn++) {
+                if (row[blockColumn] == 1) {
+                    matrix[currentBlockRow + blockRow][currentBlockColumn + blockColumn] = row[blockColumn];
+                }
             }
 
         }
-
-        return false;
     }
 
     private boolean blockReachedEndOfBox() {
@@ -229,7 +135,7 @@ public class Box {
     }
 
     public boolean canMoveBlockDown() {
-        return !blockReachedEndOfBox() && !blockCollidesWithOtherBlocks();
+        return !blockReachedEndOfBox() && !blockWillLand();
     }
 
     public boolean canMoveBlockRight() {
@@ -262,10 +168,9 @@ public class Box {
     }
 
     public synchronized void rotateBlockRight() {
-        removeBlockFromPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
         currentBlockMatrix = rotator.rotateRight(currentBlockMatrix);
+
         correctBlockPosition(currentBlockMatrix, currentBlockColumn);
-        addBlockAtPosition(currentBlockMatrix, currentBlockColumn, currentBlockRow);
     }
 
     private void correctBlockPosition(int[][] currentBlockMatrix, int currentBlockColumn) {
@@ -305,5 +210,21 @@ public class Box {
         }
 
         return 0;
+    }
+
+    public void setMatrix(int[][] matrix) {
+        this.matrix = matrix;
+    }
+
+    public int getCurrentBlockRow() {
+        return currentBlockRow;
+    }
+
+    public int getCurrentBlockColumn() {
+        return currentBlockColumn;
+    }
+
+    public int[][] getCurrentBlockMatrix() {
+        return currentBlockMatrix;
     }
 }

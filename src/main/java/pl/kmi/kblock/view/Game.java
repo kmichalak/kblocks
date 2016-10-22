@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
 
-    private int blockMoveTimeout = 60 / 2;
+    private int blockMoveTimeout = 60 / 4;
     private int blockMoveTimer = blockMoveTimeout;
 
     private volatile Box box = new Box();
@@ -110,7 +110,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void initializeGameBox() {
-        box.addBlockToBox(Block.L);
+        box.addBlockToBox(Block.T);
+        gameBox.setCurrentBrick(Block.T);
         gameBox.setWindowPadding(0);
         gameBox.enableGrid();
     }
@@ -128,7 +129,9 @@ public class Game extends Canvas implements Runnable {
             if (box.canMoveBlockDown()) {
                 box.moveBlockDown();
             } else {
+                box.putBlockInBox();
                 box.addBlockToBox(nextBlock);
+                gameBox.setCurrentBrick(nextBlock);
             }
         }
     }
